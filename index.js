@@ -13,10 +13,14 @@ function showBooks(bookList){
   bookList.forEach(showSingleBook)
 }
 function showSingleBook(book){
-  console.log(book.title.rendered)
+  console.log(book)
   //, make a copy of the template
   const copy = template.cloneNode(true);
   copy.querySelector("h1").textContent=book.title.rendered;
+  copy.querySelector(".author span").textContent= book.acf.author;
+
+  copy.querySelector(".body").innerHTML = book.content.rendered;
+
   document.querySelector("main").appendChild(copy)
 }
 
