@@ -1,6 +1,7 @@
 // global varaibales
 //2. grab template
 const template = document.querySelector("#bookTemplate").content;
+const loader = document.querySelector(".hollowLoader")
 
 //1. fetch content
 function getBooks(){
@@ -9,7 +10,7 @@ function getBooks(){
     .then(showBooks)
 }
 function showBooks(bookList){
-
+  hideLoader();
   bookList.forEach(showSingleBook)
 }
 function showSingleBook(book){
@@ -33,8 +34,15 @@ function showSingleBook(book){
   document.querySelector("main").appendChild(copy)
 }
 
-getBooks();
+function showLoader(){
+  loader.classList.remove("hidden")
+}
+function hideLoader(){
+  loader.classList.add("hidden")
+}
 
+getBooks();
+showLoader();
 
 
 
