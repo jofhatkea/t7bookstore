@@ -13,7 +13,7 @@ function showBooks(bookList){
   bookList.forEach(showSingleBook)
 }
 function showSingleBook(book){
-  console.log(book._embedded["wp:featuredmedia"][0].media_details.sizes.thumbnail.source_url)
+  console.log(book)
   //, make a copy of the template
   const copy = template.cloneNode(true);
   copy.querySelector("h1").textContent=book.title.rendered;
@@ -21,8 +21,14 @@ function showSingleBook(book){
 
   copy.querySelector(".body").innerHTML = book.content.rendered;
   //find the image
-  copy.querySelector("img").src=book._embedded["wp:featuredmedia"][0].media_details.sizes.thumbnail.source_url;
+  if(book._embedded){
+     copy.querySelector("img").src=book._embedded["wp:featuredmedia"][0].media_details.sizes.thumbnail.source_url;
+  } else {
+     copy.querySelector("img").remove()
+  }
 
+
+  copy.querySelector(".youtube").innerHTML=book.acf.youtube_video
 
   document.querySelector("main").appendChild(copy)
 }
